@@ -179,10 +179,5 @@ class Save implements ActionListener
 			//TODO
 			//Implement Save action
 		}
-		if(sVal == JFileChooser.CANCEL_OPTION)
-		{
-			//TODO
-			//Implement cancel function
-		}
 	}
 }
