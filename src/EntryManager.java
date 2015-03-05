@@ -4,11 +4,15 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,10 +24,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 
-public class EntryManager
+public abstract class EntryManager implements MouseListener
 {
 	public static void addEntry()
 	{
+		final Color grey = new Color(240,240,240);
+		final Color white = new Color(255,255,255);
 		JFrame entryFrame = new JFrame();
 		entryFrame.setSize(1400, 700);
 		entryFrame.setResizable(false);
@@ -41,13 +47,13 @@ public class EntryManager
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JPanel textPanel = new JPanel(new BorderLayout());
-		textPanel.setPreferredSize(new Dimension(1200, 700));
+		textPanel.setPreferredSize(new Dimension(1150, 700));
 		textPanel.setBackground(Color.WHITE);
 		textPanel.add(titleArea, BorderLayout.NORTH);
 		textPanel.add(scrollPane, BorderLayout.SOUTH);
 		textPanel.setBorder(new LineBorder(Color.BLACK));
 		
-		JButton save = new JButton("Save Entry");
+		final JButton save = new JButton("Save Entry");
 		save.setPreferredSize(new Dimension(180, 50));
 		save.setFont(new Font("Century Gothic", Font.PLAIN, 17));
 		save.setBorder(new LineBorder(Color.BLACK));
@@ -55,6 +61,22 @@ public class EntryManager
 		save.setFocusPainted(false);
 		save.setContentAreaFilled(false);
 		
+		save.addActionListener(new Save());
+		save.addMouseListener(new MouseAdapter(){
+	         public void mouseEntered(MouseEvent e) {
+	            save.setForeground(grey);
+	           
+	         } 
+	        			
+	      });
+		save.addMouseListener(new MouseAdapter(){
+			   public void mouseExited(MouseEvent e) {
+		            save.setForeground(new Color(0,0,0));
+		           
+		         } 
+		  
+	      });
+				
 		JButton pictures = new JButton("Pictures");
 		pictures.setPreferredSize(new Dimension(180, 50));
 		pictures.setFont(new Font("Century Gothic", Font.PLAIN, 17));
@@ -137,5 +159,30 @@ public class EntryManager
 		entryFrame.getContentPane().add(textPanel, BorderLayout.WEST);
 		entryFrame.getContentPane().add(menuPanel, BorderLayout.EAST);
 		entryFrame.setVisible(true);
+	}
+
+	
+	
+	
+	
+}
+//Implements a save dialogue box
+class Save implements ActionListener
+{
+	public void actionPerformed(ActionEvent e)
+	{
+		JFileChooser c = new JFileChooser();
+		int sVal = c.showSaveDialog(null);
+		
+		if(sVal == JFileChooser.APPROVE_OPTION)
+		{
+			//TODO
+			//Implement Save action
+		}
+		if(sVal == JFileChooser.CANCEL_OPTION)
+		{
+			//TODO
+			//Implement cancel function
+		}
 	}
 }
