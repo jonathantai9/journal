@@ -84,6 +84,19 @@ public abstract class EntryManager implements MouseListener
 		pictures.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pictures.setFocusPainted(false);
 		pictures.setContentAreaFilled(false);
+		picture.addActionListener(new Picture());
+		
+		picture.addMouseListener(new MouseAdapter(){
+			public void mouseEntered(MouseEvent e){
+				pictures.setForeground(grey);
+			}
+		});
+		picture.addMouseListener(new MouseAdapater(){
+			public void mouseExited(MouseEvent e){
+				save.setForeground(new Color(0,0,0));
+				
+			}
+		});
 		
 		Action actionBold = new ActionBold();
 		Action actionItalic = new ActionItalic();
@@ -180,4 +193,25 @@ class Save implements ActionListener
 			//Implement Save action
 		}
 	}
+}
+class Picture implements ActionListener
+{
+	public void actionPerformed(ActionEvent e)
+		JFileChooser c = new JFileChooser();
+		c.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		String fileName = c.getSelectedFiles().getAbsolutePath();
+		if(fileName == null)
+			return;
+		
+	try 
+        {
+            BufferedImage img = ImageIO.read(new File(filename));
+            ImageIcon pictureImage = new ImageIcon(img);
+            textArea.insertIcon(pictureImage);
+        } 
+
+        catch (IOException e) 
+        {
+            JOptionPane.showMessageDialog(frame, "Could not find file: " + filename);
+        }
 }
