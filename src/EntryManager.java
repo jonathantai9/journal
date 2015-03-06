@@ -172,6 +172,8 @@ public abstract class EntryManager implements MouseListener
 		entryFrame.getContentPane().add(textPanel, BorderLayout.WEST);
 		entryFrame.getContentPane().add(menuPanel, BorderLayout.EAST);
 		entryFrame.setVisible(true);
+		
+	
 	}
 
 	
@@ -191,6 +193,11 @@ class Save implements ActionListener
 		{
 			//TODO
 			//Implement Save action
+			PrintWriter pw = new PrintWriter(c.getSelectedFile().getPath()+".txt");
+			pw.out.println(titleArea);
+			pw.out.println(textPane);
+			
+			
 		}
 	}
 }
@@ -199,7 +206,7 @@ class Picture implements ActionListener
 	public void actionPerformed(ActionEvent e)
 		JFileChooser c = new JFileChooser();
 		c.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		String fileName = c.getSelectedFiles().getAbsolutePath();
+		String fileName = c.getSelectedFile().getAbsolutePath();
 		if(fileName == null)
 			return;
 		
