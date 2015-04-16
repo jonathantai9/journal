@@ -39,6 +39,7 @@ public abstract class EntryManager implements MouseListener
 		JTextArea titleArea = new JTextArea("Insert Title Here");
 		titleArea.setLineWrap(true);
 		titleArea.setPreferredSize(new Dimension(1190, 30));
+		// Makes text dissapear when moused over
 		titleArea.addFocusListener(fl);
 		
 		JTextPane textPane = new JTextPane();
