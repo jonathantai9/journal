@@ -28,6 +28,7 @@ public abstract class EntryManager implements MouseListener
 {
 	public static void addEntry()
 	{
+		focusListener fl = new focusListener();
 		final Color grey = new Color(240,240,240);
 		final Color white = new Color(255,255,255);
 		JFrame entryFrame = new JFrame();
@@ -38,6 +39,7 @@ public abstract class EntryManager implements MouseListener
 		JTextArea titleArea = new JTextArea("Insert Title Here");
 		titleArea.setLineWrap(true);
 		titleArea.setPreferredSize(new Dimension(1190, 30));
+		titleArea.addFocusListener(fl);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setFont(new Font("Courier New", Font.PLAIN, 20));
@@ -221,4 +223,16 @@ class Picture implements ActionListener
         {
             JOptionPane.showMessageDialog(frame, "Could not find file: " + filename);
         }
+}
+class focusListener implements FocusListener
+{
+	public void focusGained(FocusEvent e)
+	{
+		e.getSource().setText("");
+	}
+	
+	public void focusLost(FocusEvent e)
+	{
+		
+	}
 }
