@@ -32,7 +32,7 @@ public class Main extends JFrame
 		JLabel jlabel = new JLabel(splash);
 		JWindow splashScreen = new JWindow();
 		splashScreen.getContentPane().add(jlabel);
-		splashScreen.setSize(1600, 1000);
+		splashScreen.setSize(1920, 1080);
 		splashScreen.setLocationRelativeTo(null);
 		splashScreen.setVisible(true);
 		try
